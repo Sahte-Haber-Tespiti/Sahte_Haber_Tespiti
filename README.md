@@ -21,102 +21,9 @@ Proje 3 katmanlı bir yapıya sahiptir:
 3. **AI Model**: Scikit-learn (TF-IDF + Logistic Regression)
 4. **Veritabanı**: MySQL 8.0
 
-## 🐳 Docker ile Hızlı Başlangıç
 
-### 1. Tüm Sistemi Başlat
 
-```bash
-docker-compose up -d
-```
 
-Bu komut şunları yapar:
-- MySQL veritabanını başlatır
-- Backend API'yi başlatır
-- Frontend'i başlatır
-
-### 2. Servisleri Kontrol Et
-
-```bash
-# Servislerin durumunu gör
-docker-compose ps
-
-# Logları gör
-docker-compose logs -f
-```
-
-### 3. Uygulamaya Eriş
-
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:8000
-- **API Dokümantasyonu**: http://localhost:8000/docs
-- **MySQL**: localhost:3306
-
-### 4. Servisleri Durdur
-
-```bash
-docker-compose down
-```
-
-### 5. Verileri de Silmek İçin
-
-```bash
-docker-compose down -v
-```
-
-## 🚀 Manuel Kurulum (Docker Olmadan)
-
-### 1. Backend Kurulumu
-
-```bash
-cd backend
-pip install -r requirements.txt
-
-# .env dosyası oluştur (isteğe bağlı)
-cp .env.example .env
-```
-
-### 2. MySQL Veritabanı Ayarları
-
-MySQL'i kendiniz kurduysanız, `.env` dosyasında şunları ayarlayın:
-
-```
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=yourpassword
-DB_NAME=fake_news_db
-```
-
-### 3. Backend'i Başlat
-
-```bash
-cd backend
-uvicorn app.main:app --reload
-```
-
-### 4. Frontend Kurulumu
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-## 📊 Model Eğitimi (Opsiyonel)
-
-Model dosyaları (`model.pkl` ve `vectorizer.pkl`) yoksa, önce modeli eğitmeniz gerekir:
-
-```bash
-# Eğitim verisi CSV formatında olmalı
-# Format: 'text' (haber metni) ve 'label' (0=gerçek, 1=sahte) kolonları
-
-cd backend
-python train_model.py turkish_fake_news.csv
-```
-
-Model dosyaları `backend/app/ai_model/` klasörüne kaydedilecektir.
-
-**Not**: Model dosyaları yoksa sistem placeholder değerler döndürecektir. Gerçek analiz için model eğitimi gereklidir.
 
 ## 📁 Proje Yapısı
 
@@ -236,22 +143,4 @@ CSV dosyası şu formatta olmalıdır:
 - Docker
 - Docker Compose
 
-## 📝 Notlar
 
-- Model dosyaları yoksa sistem placeholder değerler döndürür
-- Gerçek analiz için model eğitimi gereklidir
-- Türkçe stopwords için NLTK kullanılır
-- URL'den metin çıkarma, farklı haber sitelerinde çalışabilir
-- Veritabanı otomatik olarak oluşturulur (ilk çalıştırmada)
-
-## 🔮 Gelecek Geliştirmeler
-
-- [ ] JWT tabanlı kullanıcı girişi
-- [ ] Geçmiş sorgular görüntüleme sayfası
-- [ ] İstatistik dashboard'u
-- [ ] Daha gelişmiş NLP modelleri (BERT, etc.)
-- [ ] Grafik ve raporlama
-
-## 📄 Lisans
-
-Bu proje eğitim amaçlıdır.
